@@ -1,0 +1,14 @@
+AnimationPlayer
+CollisionShape2D
+AnimatableBody2D
+CanvasLayer
+Button
+VBoxContainer
+Control
+ColorRect
+Panel
+MenuButton
+MenuBar
+Window
+AudioStreamPlayer2D
+Node
