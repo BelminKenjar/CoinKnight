@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cqwm062balxp6"]
 
 [ext_resource type="Texture2D" uid="uid://cmtnk7rotrrla" path="res://assets/sprites/knight.png" id="1_3vyb7"]
+[ext_resource type="AudioStream" uid="uid://b7368wighgabr" path="res://assets/sounds/jump.wav" id="2_g2els"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -170,6 +171,43 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjrip"]
 radius = 5.0
 
+[sub_resource type="Animation" id="Animation_g2els"]
+length = 0.09
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+resource_name = "player_jump"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
+_data = {
+&"RESET": SubResource("Animation_g2els"),
+&"player_jump": SubResource("Animation_qhqgy")
+}
+
 [node name="Player" type="CharacterBody2D" unique_id=759773070]
 z_index = 5
 collision_layer = 2
@@ -183,3 +221,10 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=770803773]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_fjrip")
+
+[node name="SoundAnimation" type="AudioStreamPlayer2D" parent="." unique_id=1151410684]
+stream = ExtResource("2_g2els")
+volume_db = -7.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SoundAnimation" unique_id=118991038]
+libraries/ = SubResource("AnimationLibrary_dqkch")

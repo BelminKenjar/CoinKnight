@@ -21,6 +21,5 @@ func _on_main_menu_pressed() -> void:
 
 
 func _on_restart_pressed() -> void:
-	print("restart pressed")
 	get_tree().paused = false;
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/level_1.tscn")
