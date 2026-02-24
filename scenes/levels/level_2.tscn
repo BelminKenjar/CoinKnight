@@ -10,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://bkhbx6tf54ykm" path="res://scenes/killzone.tscn" id="8_gw1l3"]
 [ext_resource type="PackedScene" uid="uid://dn8apj4tab6ld" path="res://scenes/platform_2.tscn" id="9_qsp8v"]
 [ext_resource type="PackedScene" uid="uid://dh06tane8vdwm" path="res://scenes/platform_3.tscn" id="10_nt80m"]
+[ext_resource type="PackedScene" uid="uid://iqofj8iumlx6" path="res://scenes/coin.tscn" id="10_tv7cl"]
 [ext_resource type="PackedScene" uid="uid://ccmkb7ml6tths" path="res://scenes/slime.tscn" id="11_lkn2k"]
+[ext_resource type="Script" uid="uid://b7k5njvjo5ex4" path="res://scripts/platforms_rotating.gd" id="12_brxtv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nt80m"]
 texture = ExtResource("4_r88tb")
@@ -228,7 +230,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_r88tb"]
 resource_name = "move"
-length = 1.4666667
+length = 1.5
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -237,16 +239,92 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.45),
+"times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(864, -187), Vector2(752, -219)]
+"values": [Vector2(864, -187), Vector2(752, -220)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1yj8c"]
 _data = {
 &"RESET": SubResource("Animation_tv7cl"),
 &"move": SubResource("Animation_r88tb")
+}
+
+[sub_resource type="Animation" id="Animation_1yj8c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(352, -219)]
+}
+
+[sub_resource type="Animation" id="Animation_ndlae"]
+resource_name = "move"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(352, -220), Vector2(352, -313)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v8d84"]
+_data = {
+&"RESET": SubResource("Animation_1yj8c"),
+&"move": SubResource("Animation_ndlae")
+}
+
+[sub_resource type="Animation" id="Animation_v8d84"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(752, -313)]
+}
+
+[sub_resource type="Animation" id="Animation_gw1l3"]
+resource_name = "move"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(752, -313), Vector2(752, -381)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p4se4"]
+_data = {
+&"RESET": SubResource("Animation_v8d84"),
+&"move": SubResource("Animation_gw1l3")
 }
 
 [node name="level_2" type="Node2D" unique_id=1335388116]
@@ -262,10 +340,10 @@ unique_name_in_owner = true
 script = ExtResource("2_brxtv")
 
 [node name="ScoreLabel" type="Label" parent="GameManager" unique_id=162521334]
-offset_left = 616.0
-offset_top = -443.0
-offset_right = 752.0
-offset_bottom = -420.0
+offset_left = 923.0
+offset_top = -539.0
+offset_right = 1059.0
+offset_bottom = -516.0
 theme_override_colors/font_color = Color(0.16121563, 0.11615958, 0.12193974, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_tv7cl")
@@ -285,11 +363,11 @@ collision_enabled = false
 
 [node name="Mid" type="TileMapLayer" parent="TileMap" unique_id=1018436875]
 use_parent_material = true
-tile_map_data = PackedByteArray("AAABAAMAAAAEAAAAAAACAAMAAAAEAAAAAAADAAMAAAAEAAAAAAAEAAMAAAAEAAAAAAABAAQAAAAEAAEAAAACAAQAAAAEAAEAAAADAAQAAAAEAAEAAAAEAAQAAAAEAAEAAAAFAAMAAAAJAAEAAAAGAAMAAAAKAAEAAAAHAAMAAAALAAEAAAAIAAMAAAAEAAAAAAAJAAIAAAAEAAAAAAAKAAIAAAAEAAAAAAALAAEAAAAEAAAAAAAMAAEAAAAEAAAAAAAIAAQAAAAEAAEAAAAJAAMAAAAEAAEAAAAKAAMAAAAEAAEAAAALAAIAAAAEAAEAAAAMAAIAAAAEAAEAAAAJAAQAAAAEAAEAAAAKAAQAAAAEAAEAAAALAAQAAAAEAAEAAAAMAAQAAAAEAAEAAAAMAAMAAAAEAAEAAAALAAMAAAAEAAEAAAANAAEAAAAJAAEAAAAOAAEAAAAKAAEAAAAPAAEAAAALAAEAAAAQAAEAAAAEAAAAAAARAAEAAAAEAAAAAAASAAIAAAAEAAAAAAATAAIAAAAEAAAAAAAUAAMAAAAEAAAAAAAVAAMAAAAEAAAAAAAQAAIAAAAEAAEAAAARAAIAAAAEAAEAAAARAAMAAAAEAAEAAAASAAMAAAAEAAEAAAATAAMAAAAEAAEAAAATAAQAAAAEAAEAAAAUAAQAAAAEAAEAAAAVAAQAAAAEAAEAAAAQAAMAAAAEAAEAAAAQAAQAAAAEAAEAAAARAAQAAAAEAAEAAAASAAQAAAAEAAEAAAAWAAQAAAAEAAAAAAAXAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAZAAQAAAAEAAAAAAAaAAQAAAAEAAAAAAAbAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAdAAMAAAAEAAAAAAAeAAMAAAAEAAAAAAAfAAIAAAAEAAAAAAAgAAIAAAAEAAAAAAAhAAEAAAAEAAAAAAAiAAEAAAAEAAAAAAAdAAQAAAAEAAEAAAAeAAQAAAAEAAEAAAAfAAQAAAAEAAEAAAAgAAQAAAAEAAEAAAAhAAQAAAAEAAEAAAAiAAQAAAAEAAEAAAAiAAMAAAAEAAEAAAAiAAIAAAAEAAEAAAAhAAIAAAAEAAEAAAAhAAMAAAAEAAEAAAAgAAMAAAAEAAEAAAAfAAMAAAAEAAEAAAAtAPz/AAAGAAAAAAAuAPz/AAAGAAAAAAAvAPz/AAAGAAAAAAAtAP3/AAAGAAEAAAAuAP3/AAAGAAEAAAAvAP3/AAAGAAEAAAAwAP3/AAAGAAEAAAAwAPz/AAAGAAEAAAAwAPv/AAAGAAEAAAAwAPr/AAAGAAEAAAAwAPn/AAAGAAAAAAAxAPn/AAAGAAAAAAAyAPn/AAAGAAAAAAAxAPr/AAAGAAEAAAAyAPr/AAAGAAEAAAAyAPv/AAAGAAEAAAAxAPv/AAAGAAEAAAAxAPz/AAAGAAEAAAAyAPz/AAAGAAEAAAAyAP3/AAAGAAEAAAAxAP3/AAAGAAEAAAA1APn/AAAGAAAAAAA2APn/AAAGAAAAAAA3APn/AAAGAAAAAAA1APr/AAAGAAEAAAA2APr/AAAGAAEAAAA3APr/AAAGAAEAAAA6APn/AAAGAAAAAAA9APn/AAAGAAAAAAA6APr/AAAIAAAAAAA9APr/AAAIAAAAAAA9APX/AAAIAAAAAAA9APT/AAAGAAAAAABAAPf/AAAGAAAAAABAAPj/AAAIAAAAAAA6APT/AAAJAAEAAAA7APT/AAAKAAEAAAA8APT/AAALAAEAAAA5APT/AAAGAAAAAAA4APT/AAAGAAAAAAA3APT/AAAGAAAAAAAtAPL/AAAGAAAAAAAsAPL/AAAGAAAAAAArAPL/AAAGAAAAAAAqAPP/AAAGAAAAAAAlAPP/AAAGAAAAAAAmAPP/AAAGAAAAAAAnAPP/AAAGAAAAAAAoAPP/AAAGAAAAAAApAPP/AAAGAAAAAAAkAPL/AAAGAAEAAAAjAPP/AAAGAAAAAAAiAPP/AAAGAAAAAAAhAPP/AAAGAAAAAAAgAPP/AAAGAAAAAAAfAPP/AAAGAAAAAAAeAPP/AAAGAAAAAAAdAPP/AAAGAAAAAAAcAPP/AAAGAAAAAAAbAPP/AAAGAAAAAAAaAPP/AAAGAAAAAAAZAPP/AAAGAAAAAAAYAPP/AAAGAAAAAAAXAPL/AAAGAAEAAAA=")
+tile_map_data = PackedByteArray("AAABAAMAAAAEAAAAAAACAAMAAAAEAAAAAAADAAMAAAAEAAAAAAAEAAMAAAAEAAAAAAABAAQAAAAEAAEAAAACAAQAAAAEAAEAAAADAAQAAAAEAAEAAAAEAAQAAAAEAAEAAAAFAAMAAAAJAAEAAAAGAAMAAAAKAAEAAAAHAAMAAAALAAEAAAAIAAMAAAAEAAAAAAAJAAIAAAAEAAAAAAAKAAIAAAAEAAAAAAALAAEAAAAEAAAAAAAMAAEAAAAEAAAAAAAIAAQAAAAEAAEAAAAJAAMAAAAEAAEAAAAKAAMAAAAEAAEAAAALAAIAAAAEAAEAAAAMAAIAAAAEAAEAAAAJAAQAAAAEAAEAAAAKAAQAAAAEAAEAAAALAAQAAAAEAAEAAAAMAAQAAAAEAAEAAAAMAAMAAAAEAAEAAAALAAMAAAAEAAEAAAANAAEAAAAJAAEAAAAOAAEAAAAKAAEAAAAPAAEAAAALAAEAAAAQAAEAAAAEAAAAAAARAAEAAAAEAAAAAAASAAIAAAAEAAAAAAATAAIAAAAEAAAAAAAUAAMAAAAEAAAAAAAVAAMAAAAEAAAAAAAQAAIAAAAEAAEAAAARAAIAAAAEAAEAAAARAAMAAAAEAAEAAAASAAMAAAAEAAEAAAATAAMAAAAEAAEAAAATAAQAAAAEAAEAAAAUAAQAAAAEAAEAAAAVAAQAAAAEAAEAAAAQAAMAAAAEAAEAAAAQAAQAAAAEAAEAAAARAAQAAAAEAAEAAAASAAQAAAAEAAEAAAAWAAQAAAAEAAAAAAAXAAQAAAAEAAAAAAAYAAQAAAAEAAAAAAAZAAQAAAAEAAAAAAAaAAQAAAAEAAAAAAAbAAQAAAAEAAAAAAAcAAQAAAAEAAAAAAAdAAMAAAAEAAAAAAAeAAMAAAAEAAAAAAAfAAIAAAAEAAAAAAAgAAIAAAAEAAAAAAAhAAEAAAAEAAAAAAAiAAEAAAAEAAAAAAAdAAQAAAAEAAEAAAAeAAQAAAAEAAEAAAAfAAQAAAAEAAEAAAAgAAQAAAAEAAEAAAAhAAQAAAAEAAEAAAAiAAQAAAAEAAEAAAAiAAMAAAAEAAEAAAAiAAIAAAAEAAEAAAAhAAIAAAAEAAEAAAAhAAMAAAAEAAEAAAAgAAMAAAAEAAEAAAAfAAMAAAAEAAEAAAAtAPz/AAAGAAAAAAAuAPz/AAAGAAAA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")
 tile_set = SubResource("TileSet_brxtv")
 
 [node name="Portal" parent="TileMap" unique_id=1649502480 instance=ExtResource("5_1yj8c")]
-position = Vector2(192, -48)
+position = Vector2(1057, -479)
 
 [node name="Slime" parent="TileMap" unique_id=859716712 instance=ExtResource("11_lkn2k")]
 position = Vector2(392, -208)
@@ -317,6 +395,39 @@ shape = SubResource("WorldBoundaryShape2D_tv7cl")
 
 [node name="Coins" type="Node" parent="." unique_id=864811302]
 
+[node name="Coin" parent="Coins" unique_id=1592540764 instance=ExtResource("10_tv7cl")]
+position = Vector2(104, 22)
+
+[node name="Coin2" parent="Coins" unique_id=380194110 instance=ExtResource("10_tv7cl")]
+position = Vector2(402, 33)
+
+[node name="Coin3" parent="Coins" unique_id=951991608 instance=ExtResource("10_tv7cl")]
+position = Vector2(622, -66)
+
+[node name="Coin4" parent="Coins" unique_id=172533885 instance=ExtResource("10_tv7cl")]
+position = Vector2(1052, -175)
+
+[node name="Coin5" parent="Coins" unique_id=1486698420 instance=ExtResource("10_tv7cl")]
+position = Vector2(641, -240)
+
+[node name="Coin6" parent="Coins" unique_id=285281889 instance=ExtResource("10_tv7cl")]
+position = Vector2(513, -240)
+
+[node name="Coin7" parent="Coins" unique_id=1033862443 instance=ExtResource("10_tv7cl")]
+position = Vector2(430, -240)
+
+[node name="Coin8" parent="Coins" unique_id=1114469104 instance=ExtResource("10_tv7cl")]
+position = Vector2(436, -355)
+
+[node name="Coin9" parent="Coins" unique_id=29490170 instance=ExtResource("10_tv7cl")]
+position = Vector2(654, -398)
+
+[node name="Coin10" parent="Coins" unique_id=1849242289 instance=ExtResource("10_tv7cl")]
+position = Vector2(710, -293)
+
+[node name="Coin11" parent="Coins" unique_id=215100619 instance=ExtResource("10_tv7cl")]
+position = Vector2(233, -58)
+
 [node name="Platforms" type="Node" parent="." unique_id=1146660064]
 
 [node name="Platform_2" parent="Platforms" unique_id=1226288935 instance=ExtResource("9_qsp8v")]
@@ -326,11 +437,45 @@ position = Vector2(578, 22)
 libraries/ = SubResource("AnimationLibrary_tv7cl")
 autoplay = &"move"
 
-[node name="Platform_3" parent="Platforms" unique_id=1968985486 instance=ExtResource("10_nt80m")]
+[node name="Platform_3" parent="Platforms" unique_id=1463205282 instance=ExtResource("10_nt80m")]
 position = Vector2(864, -187)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform_3" unique_id=2098281624]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform_3" unique_id=447347994]
 libraries/ = SubResource("AnimationLibrary_1yj8c")
+autoplay = &"move"
+
+[node name="Platform_4" parent="Platforms" unique_id=2025068811 instance=ExtResource("10_nt80m")]
+position = Vector2(352, -219)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform_4" unique_id=37339477]
+libraries/ = SubResource("AnimationLibrary_v8d84")
+autoplay = &"move"
+
+[node name="Rotating_platforms_1" type="Node2D" parent="Platforms" unique_id=1134248940]
+position = Vector2(436, -356.461)
+script = ExtResource("12_brxtv")
+
+[node name="Platform_2" parent="Platforms/Rotating_platforms_1" unique_id=1051299056 instance=ExtResource("10_nt80m")]
+position = Vector2(50, 0)
+
+[node name="Platform_3" parent="Platforms/Rotating_platforms_1" unique_id=1692645622 instance=ExtResource("10_nt80m")]
+position = Vector2(-50, 0)
+
+[node name="Rotating_platforms_2" type="Node2D" parent="Platforms" unique_id=66384662]
+position = Vector2(604, -356.461)
+script = ExtResource("12_brxtv")
+
+[node name="Platform_2" parent="Platforms/Rotating_platforms_2" unique_id=2022818610 instance=ExtResource("10_nt80m")]
+position = Vector2(50, 0)
+
+[node name="Platform_3" parent="Platforms/Rotating_platforms_2" unique_id=620920276 instance=ExtResource("10_nt80m")]
+position = Vector2(-50, 0)
+
+[node name="Platform_5" parent="Platforms" unique_id=1095959751 instance=ExtResource("10_nt80m")]
+position = Vector2(752, -313)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform_5" unique_id=1800080493]
+libraries/ = SubResource("AnimationLibrary_p4se4")
 autoplay = &"move"
 
 [node name="Slime" parent="." unique_id=670204523 instance=ExtResource("11_lkn2k")]

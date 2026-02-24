@@ -326,7 +326,7 @@ tile_map_data = PackedByteArray("AAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAABAAQAAAAAAAE
 tile_set = SubResource("TileSet_iywne")
 
 [node name="Portal" parent="TileMap" unique_id=1649502480 instance=ExtResource("5_kvpfn")]
-position = Vector2(160, 61)
+position = Vector2(714, -418)
 
 [node name="Player" parent="." unique_id=759773070 instance=ExtResource("1_uwrxv")]
 position = Vector2(37, 46)
